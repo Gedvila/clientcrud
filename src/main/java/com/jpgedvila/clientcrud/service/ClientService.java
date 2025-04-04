@@ -24,7 +24,9 @@ public class ClientService {
 
     @Transactional(readOnly = true)
     public ClientDTO findById(Long id) {
-        Client client = repository.findById(id).orElseThrow();
+        Client client = repository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Cliente não encontrado ")
+        );
         return new ClientDTO(client);
     }
 
